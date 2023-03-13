@@ -27,8 +27,8 @@ public class Sphere extends Circle {
         centerPoint.add(0f);
         centerPoint.add(0f);
 //        createHyperbolloid1();
-        createHyperbolloid2();
-//        createEllipsoid();
+//        createHyperbolloid2();
+        createEllipsoid();
 //        createSphere();
 //        createBox();
         setupVAOVBO();
@@ -66,15 +66,17 @@ public class Sphere extends Circle {
         float stackStep = (float) Math.PI / stackCount;
         float sectorAngle, stackAngle, x, y, z;
 
-        for (float u = -pi; u <= pi; u += pi / 36) {
-            for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+        for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+            for (float u = -pi; u <= pi; u += pi / 36) {
                 Vector3f temp_vector = new Vector3f();
                 temp_vector.x = (float) (centerPoint.get(0) + radius * (Math.cos(v) * Math.cos(u)));
                 temp_vector.y = (float) (centerPoint.get(1) + radiusY * (Math.cos(v) * Math.sin(u)));
-                temp_vector.z = (float) (centerPoint.get(2) + radiusZ *(Math.sin(v)));
+                temp_vector.z = (float) (centerPoint.get(2) + radiusZ * (Math.sin(v)));
                 vertices.add(temp_vector);
             }
         }
+
+
     }
 
     public void createHyperbolloid1() {
@@ -83,12 +85,12 @@ public class Sphere extends Circle {
         float stackStep = (float) Math.PI / stackCount;
         float sectorAngle, stackAngle, x, y, z;
 
-        for (float u = -pi; u <= pi; u += pi / 36) {
-            for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+        for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+            for (float u = -pi; u <= pi; u += pi / 36) {
                 Vector3f temp_vector = new Vector3f();
-                temp_vector.x = (float) (centerPoint.get(0) + radius * ((1/Math.cos(v)) * Math.cos(u)));
-                temp_vector.z = (float) (centerPoint.get(1) + radiusY * ((1/Math.cos(v)) * Math.sin(u)));
-                temp_vector.y = (float) (centerPoint.get(2) + radiusZ *(Math.tan(v)));
+                temp_vector.x = (float) (centerPoint.get(0) + radius * ((1 / Math.cos(v)) * Math.cos(u)));
+                temp_vector.y = (float) (centerPoint.get(1) + radiusY * ((1 / Math.cos(v)) * Math.sin(u)));
+                temp_vector.z = (float) (centerPoint.get(2) + radiusZ * (Math.tan(v)));
                 vertices.add(temp_vector);
             }
         }
@@ -100,27 +102,24 @@ public class Sphere extends Circle {
         float stackStep = (float) Math.PI / stackCount;
         float sectorAngle, stackAngle, x, y, z;
 
-        for (float u = -pi/2; u <= pi/2; u += pi / 36) {
-            for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+        for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
+            for (float u = -pi / 2; u <= pi / 2; u += pi / 36) {
                 Vector3f temp_vector = new Vector3f();
-                temp_vector.x = (float) (centerPoint.get(0) + radius * (Math.tan(v) * Math.cos(u)));
-                temp_vector.z = (float) (centerPoint.get(1) + radiusY * (Math.tan(v) * Math.sin(u)));
-                temp_vector.y = (float) (centerPoint.get(2) + radiusZ *(1/Math.cos(v)));
+                temp_vector.x = (float) (centerPoint.get(0) + radius * (Math.cos(v) * Math.cos(u)));
+                temp_vector.y = (float) (centerPoint.get(1) + radiusY * (Math.cos(v) * Math.sin(u)));
+                temp_vector.z = (float) (centerPoint.get(2) + radiusZ * (Math.sin(v)));
+                vertices.add(temp_vector);
+            }
+            for (float u = pi / 2; u <= 3 * pi / 2; u += pi / 36) {
+                Vector3f temp_vector = new Vector3f();
+                temp_vector.x = (float) (centerPoint.get(0) + radius * (Math.cos(v) * Math.cos(u)));
+                temp_vector.y = (float) (centerPoint.get(1) + radiusY * (Math.cos(v) * Math.sin(u)));
+                temp_vector.z = (float) (centerPoint.get(2) + radiusZ * (Math.sin(v)));
                 vertices.add(temp_vector);
             }
 
         }
 
-        for (float u = pi/2; u <= 3*pi/2; u += pi / 36) {
-            for (float v = -pi / 2; v <= pi / 2; v += pi / 36) {
-                Vector3f temp_vector = new Vector3f();
-                temp_vector.x = (float) (centerPoint.get(0) + radius * (Math.tan(v) * Math.cos(u)));
-                temp_vector.z = (float) (centerPoint.get(1) + radiusY * (Math.tan(v) * Math.sin(u)));
-                temp_vector.y = (float) (centerPoint.get(2) + radiusZ *(1/Math.cos(v)));
-                vertices.add(temp_vector);
-            }
-
-        }
     }
 
     public void createBox() {
