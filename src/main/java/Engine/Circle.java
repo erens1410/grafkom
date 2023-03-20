@@ -42,6 +42,9 @@ public class Circle extends Object {
         glLineWidth(1);
         glPointSize(0);
         glDrawArrays(GL_POLYGON, 0, vertices.size());
+        for (Object child : childObject) {
+            child.draw();
+        }
     }
 
 }
