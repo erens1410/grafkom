@@ -13,7 +13,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 
 public class Main {
-
+    int countDegree = 0;
     private Window window = new Window(1400, 1400, "C14210131");
 
     private ArrayList<Object> objects = new ArrayList<>();
@@ -49,91 +49,121 @@ public class Main {
                 new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
         ),
                 new ArrayList<>(), new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),
-                0f, 0f, 0.2f, 0.2f, 0.2f, 18, 9));
+                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
         //Merkurius
-        objectSphere.add(new Sphere(Arrays.asList(
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
-                new ArrayList<>(), new Vector4f(1.0f, 1.0f, 0.0f, 1.0f),
-                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
-        //Venus
-        objectSphere.add(new Sphere(Arrays.asList(
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
-                new ArrayList<>(), new Vector4f(1.0f, 1.0f, 1.0f, 1.0f),
-                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
-        //Bumi
-        objectSphere.add(new Sphere(Arrays.asList(
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
-                new ArrayList<>(), new Vector4f(0.0f, 1.0f, 0.0f, 1.0f),
-                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
-        //Bulan
-        objectSphere.add(new Sphere(Arrays.asList(
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
-                new ArrayList<>(), new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),
-                0f, 0f, 0.03f, 0.03f, 0.03f, 18, 9));
-        //Mars
-        objectSphere.add(new Sphere(Arrays.asList(
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
-                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
-        ),
-                new ArrayList<>(), new Vector4f(1.0f, 0.0f, 1.0f, 1.0f),
-                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
-        objectSphere.get(1).translateObj(0.23f, 0.23f, 0.23f);
-        objectSphere.get(2).translateObj(0.43f, 0.43f, 0.43f);
-        objectSphere.get(3).translateObj(0.63f, 0.63f, 0.63f);
-        objectSphere.get(4).translateObj(0.72f, 0.77f, 0.72f);
-        objectSphere.get(5).translateObj(-0.32f, -0.32f, -0.32f);
+//        objectSphere.add(new Sphere(Arrays.asList(
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//        ),
+//                new ArrayList<>(), new Vector4f(1.0f, 1.0f, 0.0f, 1.0f),
+//                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
+//        //Venus
+//        objectSphere.add(new Sphere(Arrays.asList(
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//        ),
+//                new ArrayList<>(), new Vector4f(1.0f, 1.0f, 1.0f, 1.0f),
+//                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
+//        //Bumi
+//        objectSphere.add(new Sphere(Arrays.asList(
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//        ),
+//                new ArrayList<>(), new Vector4f(0.0f, 1.0f, 0.0f, 1.0f),
+//                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
+//        //Bulan
+//        objectSphere.add(new Sphere(Arrays.asList(
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//        ),
+//                new ArrayList<>(), new Vector4f(0.0f, 0.0f, 1.0f, 1.0f),
+//                0f, 0f, 0.03f, 0.03f, 0.03f, 18, 9));
+//        //Mars
+//        objectSphere.add(new Sphere(Arrays.asList(
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+//                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+//        ),
+//                new ArrayList<>(), new Vector4f(1.0f, 0.0f, 1.0f, 1.0f),
+//                0f, 0f, 0.1f, 0.1f, 0.1f, 18, 9));
+//        objectSphere.get(1).translateObj(0.23f, 0.23f, 0.23f);
+//        objectSphere.get(2).translateObj(0.43f, 0.43f, 0.43f);
+//        objectSphere.get(3).translateObj(0.63f, 0.63f, 0.63f);
+//        objectSphere.get(4).translateObj(0.72f, 0.77f, 0.72f);
+//        objectSphere.get(5).translateObj(-0.32f, -0.32f, -0.32f);
 
 //        objectSphere.get(1).scaleObj(1.0f, 1.0f, 1.0f);
 //        objectSphere.get(2).scaleObj(1.0f, 1.0f, 1.0f);
 //        objectSphere.get(3).scaleObj(1.0f, 1.0f, 1.0f);
 //        objectSphere.get(4).scaleObj(1.0f, 1.0f, 1.0f);
 //        objectSphere.get(5).scaleObj(1.0f, 1.0f, 1.0f);
-        System.out.println(objectSphere.size());
+//        System.out.println(objectSphere.size());
+        objectSphere.get(0).getChildObject().add(new Sphere(Arrays.asList(
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+        ),
+                new ArrayList<>(), new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),
+                0f, 0f, 0.2f, 0.2f, 0.2f, 18, 9));
 
+        objectSphere.get(0).getChildObject().get(0).translateObj(0.23f, 0.23f, 0.23f);
+
+        objectSphere.get(0).getChildObject().add(new Sphere(Arrays.asList(
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+        ),
+                new ArrayList<>(), new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),
+                0f, 0f, 0.2f, 0.2f, 0.2f, 18, 9));
+
+        objectSphere.get(0).getChildObject().get(1).translateObj(0.43f, 0.43f, 0.43f);
+
+        objectSphere.get(0).getChildObject().get(1).getChildObject().add(new Sphere(Arrays.asList(
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.vert", GL_VERTEX_SHADER),
+                new ShaderProgram.ShaderModuleData("resources/shaders/scene.frag", GL_FRAGMENT_SHADER)
+        ),
+                new ArrayList<>(), new Vector4f(1.0f, 0.0f, 0.0f, 1.0f),
+                0f, 0f, 0.2f, 0.2f, 0.2f, 18, 9));
     }
 
     public void input() {
         if (window.isKeyPressed(GLFW_KEY_G)) {
+            countDegree++;
 
             objectSphere.get(0).rotateObj((float) Math.toRadians(4f), 0f, 0f, 1f);
 
-            objectSphere.get(1).translateObj(-0.23f,-0.23f,-0.23f);
-            objectSphere.get(1).rotateObj((float) Math.toRadians(1f), 0f, 0f, 1f);
-            objectSphere.get(1).translateObj(0.23f, 0.23f, 0.23f);
+//            objectSphere.get(1).translateObj(-0.23f, -0.23f, -0.23f);
+//            objectSphere.get(1).rotateObj((float) Math.toRadians(1f), 0f, 0f, 1f);
+//            objectSphere.get(1).translateObj(0.23f, 0.23f, 0.23f);
+//
+//            objectSphere.get(2).translateObj(-0.43f, -0.43f, -0.43f);
+//            objectSphere.get(2).rotateObj((float) Math.toRadians(2f), 0f, 0f, 1f);
+//            objectSphere.get(2).translateObj(0.43f, 0.43f, 0.43f);
+//
+//            objectSphere.get(3).translateObj(-0.63f, -0.63f, -0.63f);
+//            objectSphere.get(3).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
+//            objectSphere.get(3).translateObj(0.63f, 0.63f, 0.63f);
+//
+//            objectSphere.get(4).translateObj(-0.72f, -0.77f, -0.72f);
+//            objectSphere.get(4).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
+//            objectSphere.get(4).translateObj(0.72f, 0.77f, 0.72f);
+//
+//            objectSphere.get(5).translateObj(0.32f, 0.32f, 0.32f);
+//            objectSphere.get(5).rotateObj((float) Math.toRadians(1.1f), 0f, 0f, 1f);
+//            objectSphere.get(5).translateObj(-0.32f, -0.32f, -0.32f);
 
-            objectSphere.get(2).translateObj(-0.43f, -0.43f, -0.43f);
-            objectSphere.get(2).rotateObj((float) Math.toRadians(2f), 0f, 0f, 1f);
-            objectSphere.get(2).translateObj(0.43f, 0.43f, 0.43f);
-
-            objectSphere.get(3).translateObj(-0.63f, -0.63f, -0.63f);
-            objectSphere.get(3).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
-            objectSphere.get(3).translateObj(0.63f, 0.63f, 0.63f);
-
-            objectSphere.get(4).translateObj(-0.72f,-0.77f,-0.72f);
-            objectSphere.get(4).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
-            objectSphere.get(4).translateObj(0.72f, 0.77f, 0.72f);
-
-            objectSphere.get(5).translateObj(0.32f, 0.32f, 0.32f);
-            objectSphere.get(5).rotateObj((float) Math.toRadians(1.1f), 0f, 0f, 1f);
-            objectSphere.get(5).translateObj(-0.32f, -0.32f, -0.32f);
+            for (Object child : objectSphere.get(0).getChildObject()) {
+                child.rotateObj((float) Math.toRadians(countDegree * -1 * 0.5f), 0.0f, 0.0f, 1.0f);
+                child.translateObj(child.getCenterPoint().get(0) * -1, child.getCenterPoint().get(1) * -1, child.getCenterPoint().get(2) * -1);
+                child.rotateObj((float) Math.toRadians(0.5f), 0.0f, 0.0f, 1.0f);
+            }
         }
         if (window.isKeyPressed(GLFW_KEY_F)) {
             objectSphere.get(0).rotateObj((float) Math.toRadians(0.5f), 0f, 0f, 1f);
-            objectSphere.get(1).rotateObj((float) Math.toRadians(1f), 0f, 0f, 1f);
-            objectSphere.get(2).rotateObj((float) Math.toRadians(2f), 0f, 0f, 1f);
-            objectSphere.get(3).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
-            objectSphere.get(4).translateObj(-0.72f,-0.77f,-0.72f);
-            objectSphere.get(4).rotateObj((float) Math.toRadians(0.5f), 0f, 0f, 1f);
-            objectSphere.get(4).translateObj(0.63f, 0.63f, 0.63f);
-            objectSphere.get(5).rotateObj((float) Math.toRadians(1.1f), 0f, 0f, 1f);
+//            objectSphere.get(1).rotateObj((float) Math.toRadians(1f), 0f, 0f, 1f);
+//            objectSphere.get(2).rotateObj((float) Math.toRadians(2f), 0f, 0f, 1f);
+//            objectSphere.get(3).rotateObj((float) Math.toRadians(0.9f), 0f, 0f, 1f);
+//            objectSphere.get(4).translateObj(-0.72f, -0.77f, -0.72f);
+//            objectSphere.get(4).rotateObj((float) Math.toRadians(0.5f), 0f, 0f, 1f);
+//            objectSphere.get(4).translateObj(0.63f, 0.63f, 0.63f);
+//            objectSphere.get(5).rotateObj((float) Math.toRadians(1.1f), 0f, 0f, 1f);
 
         }
         if (window.getMouseInput().isLeftButtonPressed()) {
