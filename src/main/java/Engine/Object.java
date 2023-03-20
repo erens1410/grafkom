@@ -1,8 +1,10 @@
 package Engine;
 
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -13,6 +15,24 @@ import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
 
 public class Object extends ShaderProgram {
+    public List<Float> getCenterPoint() {
+        return centerPoint;
+    }
+
+    public void setCenterPoint(List<Float> centerPoint) {
+        this.centerPoint = centerPoint;
+    }
+
+    public List<Object> getChildObject() {
+        return childObject;
+    }
+
+    public void setChildObject(List<Object> childObject) {
+        this.childObject = childObject;
+    }
+
+    List<Float> centerPoint;
+    List<Object> childObject;
     List<Vector3f> vertices; //buat nyimpen titik2 yang mau digambar
     List<Vector3f> verticesColor; // warna
     int vao, vbo;
@@ -23,13 +43,19 @@ public class Object extends ShaderProgram {
 
     int vboColor;
 
+    Matrix4f model;
+
+
     public Object(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, Vector4f color) {
         super(shaderModuleDataList);
         this.vertices = vertices;
         setupVAOVBO();
         uniformsMap = new UniformsMap(getProgramId());
         uniformsMap.createUniform("uni_color");
+        uniformsMap.createUniform("model");
         this.color = color;
+        model = new Matrix4f();
+        childObject = new ArrayList<>();
     }
 
     public Object(List<ShaderModuleData> shaderModuleDataList, List<Vector3f> vertices, List<Vector3f> verticesColor) {
@@ -72,6 +98,7 @@ public class Object extends ShaderProgram {
     public void drawSetup() {
         bind();
         uniformsMap.setUniform("uni_color", color);
+        uniformsMap.setUniform("model", model);
 
         //Bind VBO
         glEnableVertexAttribArray(0);
@@ -112,7 +139,11 @@ public class Object extends ShaderProgram {
         */
         // first -> start gambar dari mana
         // param ke 3 -> batas gambar titik nya
-        glDrawArrays(GL_TRIANGLE_FAN, 0, vertices.size());
+        glDrawArrays(GL_POLYGON, 0, vertices.size());
+
+        for (Object child : childObject) {
+            child.draw();
+        }
     }
 
     public void drawWithVerticesColor() {
@@ -163,5 +194,26 @@ public class Object extends ShaderProgram {
     public void updateVertices(int index, Vector3f vector) {
         vertices.set(index, vector);
         setupVAOVBO();
+    }
+
+    public void translateObj(float offsetX, float offsetY, float offsetZ) {
+        model = new Matrix4f().translate(offsetX, offsetY, offsetZ).mul(new Matrix4f(model));
+        for (Object child : childObject) {
+            child.translateObj(offsetX, offsetY, offsetZ);
+        }
+    }
+
+    public void rotateObj(float degree, float x, float y, float z) {
+        model = new Matrix4f().rotate(degree, x, y, z).mul(new Matrix4f(model));
+        for (Object child : childObject) {
+            child.rotateObj(degree, x, y, z);
+        }
+    }
+
+    public void scaleObj(float scaleX, float scaleY, float scaleZ) {
+        model = new Matrix4f().scale(scaleX, scaleY, scaleZ).mul(new Matrix4f(model));
+        for (Object child : childObject) {
+            child.scaleObj(scaleX, scaleY, scaleZ);
+        }
     }
 }
